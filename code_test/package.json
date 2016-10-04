@@ -1,13 +1,27 @@
 {
-  "name": "coding-test",
-  "version": "0.0.1",
-  "description": "Prescriptive data coding test",
-  "author": "Philip Leesha <philipleesha@gmail.com>",
+  "name": "code-test",
+  "version": "0.1.0",
+  "description": "A coding test from Prescriptive Data",
+  "main": "src/index.js",
   "dependencies": {
+    "babel": "^6.5.2",
+    "babel-polyfill": "^6.16.0",
+    "babel-runtime": "^6.11.6"
   },
-  "main": "index",
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-es2015": "^6.16.0",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1",
+    "webpack-merge": "^0.14.1"
+  },
   "scripts": {
-    "start": "node index",
-    "test": "make lint && make test"
-  }
+    "test": "",
+    "start": "webpack --config webpack.config.js",
+    "devserver": "webpack-dev-server --port 3000 --config webpack.config.js --progress --colors --hot --content-base ./"
+  },
+  "author": "Philip Leesha <philipleesha@gmail.com>",
+  "license": "ISC"
 }

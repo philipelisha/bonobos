@@ -12,9 +12,25 @@ output_sample.txt
 
 ## Installation
 
-To run the app and see the output run `npm start`.
+Just run `npm install`:
 
+```
+npm install
+```
+
+
+## Use it
+
+Run the dev server:
+
+```
+npm start
+```
+
+Then open [localhost:8080](http://localhost:8080/).
 
 ## Testing
 
 To test the app and see the output run `npm test`.
+
+
