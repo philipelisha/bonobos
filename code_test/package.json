@@ -1,0 +1,13 @@
+{
+  "name": "coding-test",
+  "version": "0.0.1",
+  "description": "Prescriptive data coding test",
+  "author": "Philip Leesha <philipleesha@gmail.com>",
+  "dependencies": {
+  },
+  "main": "index",
+  "scripts": {
+    "start": "node index",
+    "test": "make lint && make test"
+  }
+}

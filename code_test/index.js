@@ -16,10 +16,14 @@ const commas = "Abercrombie, Neil, Male, Tan, 2/13/1943\n" +
 "Kelly, Sue, Female, Pink, 7/12/1959"
 
 /*
- * Index constants
+ * Index constants before removal or move
  */
 const indexOfMiddleInitial = 2;
 const indexOfColor = 3;
+
+/*
+ * Index constants after removal or move
+ */
 const indexOfGender = 2;
 const indexOfDate = 3;
 const indexOfLastName = 0;
@@ -86,7 +90,7 @@ const sortByDateThenLastName = (a, b) => {
 }
 
 /*
- * Date formating helper
+ * Date formatting helper
  */
 const formatDate = (date) => {
 	let newDate = new Date(date),
@@ -147,14 +151,11 @@ const aggregatePipes = (string) => {
 	return separatedArray;
 }
 
-/*
- * Combine arrays function
- */
-const combineArrays = () => {
+const aggregateCombined = () => {
 	let commaArray = aggregateCommas(commas),
 		spaceArray = aggregateSpaces(spaces),
 		pipesArray = aggregatePipes(pipes),
-		combinedArray = commaArray.concat(spaceArray).concat(pipesArray);
+		combinedArray = commaArray.concat(spaceArray, pipesArray);
   
 	return combinedArray;
 }
@@ -163,7 +164,7 @@ const combineArrays = () => {
  * Generate output function
  */
 const logTheOutput = () => {
-	let combinedArrays = combineArrays(),
+	let combinedArrays = aggregateCombined(),
 		firstOutput = combinedArrays.slice().sort(sortByGenderThenLastName),
 		secondOutput = combinedArrays.slice().sort(sortByDateThenLastName),
 		thirdOutput = combinedArrays.slice().sort(sortByLastNameDesc);

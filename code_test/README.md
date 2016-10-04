@@ -12,4 +12,9 @@ output_sample.txt
 
 ## Installation
 
-To run the app and see the output simply run the javascript file main.js in the environment of your choice. If using node you can simply type `node main` while in the directory. The output will be logged to the console. 
+To run the app and see the output run `npm start`.
+
+
+## Testing
+
+To test the app and see the output run `npm test`.
