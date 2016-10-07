@@ -12,7 +12,7 @@ output_sample.txt
 
 ## Installation
 
-Just run `npm install`:
+Install using:
 
 ```
 npm install
@@ -27,10 +27,12 @@ Run the dev server:
 npm start
 ```
 
-Then open [localhost:8080](http://localhost:8080/).
+Then open [localhost:3000](http://localhost:3000/).
 
 ## Testing
 
-To test the app and see the output run `npm test`.
+To test the app and see the output:
 
-
+```
+npm test
+```
