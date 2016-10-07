@@ -5,7 +5,7 @@ import { GenerateTheOutPut } from "./components/GenerateTheOutPut";
  */
 const element = document.getElementById('root');
 const outPut = GenerateTheOutPut();
-const logTheOutput = (output, el) => {
+export const logTheOutput = (output, el) => {
 	el.appendChild(outPut);
 }
 
