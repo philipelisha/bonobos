@@ -2,6 +2,7 @@ import { AggregateCombined } from "./AggregateCombined";
 import { SortByGenderThenLastName } from "./SortByGenderThenLastName";
 import { SortByDateThenLastName } from "./SortByDateThenLastName";
 import { SortByLastNameDesc } from "./SortByLastNameDesc";
+import { GenerateTextNode } from "./GenerateTextNode";
 import { commas } from "../comma";
 import { spaces } from "../space";
 import { pipes } from "../pipe";
@@ -16,38 +17,26 @@ export const GenerateTheOutPut = () => {
 		thirdOutput = combinedArrays.slice().sort(SortByLastNameDesc),
 		mainElement = document.createElement("div");
 
-	mainElement.appendChild(document.createTextNode("Output 1: "));
-	mainElement.appendChild(document.createElement("br"));
+	mainElement.appendChild(GenerateTextNode("Output 1: ", true));
 
 	firstOutput.forEach((o)=> {
-		let theOutput = o.toString().replace(/,/g , " "),
-			recordElement = document.createTextNode(theOutput);
-		mainElement.appendChild(recordElement);
-		mainElement.appendChild(document.createElement("br"));
+		let theOutput = o.toString().replace(/,/g , " ");
+		mainElement.appendChild(GenerateTextNode(theOutput, true));
 	});
 
-	mainElement.appendChild(document.createElement("br"));
-	mainElement.appendChild(document.createTextNode("Output 2: "));
-	mainElement.appendChild(document.createElement("br"));
+	mainElement.appendChild(GenerateTextNode("Output 2: ", true, true));
 
 	secondOutput.forEach((o)=> {
-		let theOutput = o.toString().replace(/,/g , " "),
-		recordElement = document.createTextNode(theOutput);
-		mainElement.appendChild(recordElement);
-		mainElement.appendChild(document.createElement("br"));
+		let theOutput = o.toString().replace(/,/g , " ");
+		mainElement.appendChild(GenerateTextNode(theOutput, true));
 	});
 
-	mainElement.appendChild(document.createElement("br"));
-	mainElement.appendChild(document.createTextNode("Output 3: "));
-	mainElement.appendChild(document.createElement("br"));
+	mainElement.appendChild(GenerateTextNode("Output 3: ", true, true));
 
 	thirdOutput.forEach((o)=> {
-		let theOutput = o.toString().replace(/,/g , " "),
-		recordElement = document.createTextNode(theOutput);
-		mainElement.appendChild(recordElement);
-		mainElement.appendChild(document.createElement("br"));
+		let theOutput = o.toString().replace(/,/g , " ");
+		mainElement.appendChild(GenerateTextNode(theOutput, true));
 	});
-	//const outPut = "Output 1:\n" + firstOutput + "\n" + "Output 2:\n" + secondOutput + "\n" + "Output 3:\n" + thirdOutput;
 
 	return mainElement;
 }
