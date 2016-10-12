@@ -8,9 +8,34 @@ function CreatePiece(pos, clr) {
 }
 
 function GererateBoard() {
-
+	this.board = {
+		pieces: [],
+		activePiece: {
+			position: [],
+			color: ""
+		}
+	}
 }
 
-function UpdatePosition() {
+GererateBoard.prototype.UpdatePosition(dir) {
 
+	let position = this.board.activePiece.position;
+	switch( dir ) {
+		case "down":
+			position.map(([x,y])=>{
+				return [x-1,y];
+			});
+
+		case "left":
+			position.map(([x,y])=>{
+				return [x,y+1];
+			});
+
+		case "right":
+			position.map(([x,y])=>{
+				return [x,y-1];
+			});
+	}
+
+	this.board.activePiece = position;
 }

@@ -1,4 +1,4 @@
-# Ruben Management Assesment
+# Rudin Management Assesment
 
 In a language of your choice, parse the following set of three input files:
 

@@ -3,9 +3,10 @@ import { SortByGenderThenLastName } from "./SortByGenderThenLastName";
 import { SortByDateThenLastName } from "./SortByDateThenLastName";
 import { SortByLastNameDesc } from "./SortByLastNameDesc";
 import { GenerateTextNode } from "./GenerateTextNode";
-import { commas } from "../comma";
-import { spaces } from "../space";
-import { pipes } from "../pipe";
+import { ReadTextFile } from "./ReadTextFile";
+const commas = ReadTextFile("../comma.txt");
+const spaces = ReadTextFile("../space.txt");
+const pipes  = ReadTextFile("../pipe.txt");
 
 /*
  * Generate output function
