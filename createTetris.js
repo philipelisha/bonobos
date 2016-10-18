@@ -1,41 +1,46 @@
-function CreatePiece(pos, clr) {
-	let newPiece = {
-		position: pos,
-		color: clr
-	};
+let GererateBoard = {
+	init: ()=> {
 
-	return newPiece;
-}
+	},
 
-function GererateBoard() {
-	this.board = {
+	board: {
 		pieces: [],
 		activePiece: {
 			position: [],
 			color: ""
 		}
+	},
+
+	updatePosition: (dir) => {
+		let position = this.board.activePiece.position;
+		switch( dir ) {
+			case "down":
+				position.map(([x,y])=>{
+					return [x-1,y];
+				});
+
+			case "left":
+				position.map(([x,y])=>{
+					return [x,y+1];
+				});
+
+			case "right":
+				position.map(([x,y])=>{
+					return [x,y-1];
+				});
+		}
+
+		this.board.activePiece = position;
+	},
+
+	createPiece: (pos, clr) => {
+		let newPiece = {
+			position: pos,
+			color: clr
+		};
+
+		return newPiece;
 	}
 }
 
-GererateBoard.prototype.UpdatePosition(dir) {
-
-	let position = this.board.activePiece.position;
-	switch( dir ) {
-		case "down":
-			position.map(([x,y])=>{
-				return [x-1,y];
-			});
-
-		case "left":
-			position.map(([x,y])=>{
-				return [x,y+1];
-			});
-
-		case "right":
-			position.map(([x,y])=>{
-				return [x,y-1];
-			});
-	}
-
-	this.board.activePiece = position;
-}
+let newGame = Object.create(GererateBoard);
