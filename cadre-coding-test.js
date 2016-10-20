@@ -1,57 +1,57 @@
 "use strict";
-var node = {
-	data: null,
-	left: null,
-	right: null,
-	parent: null
+//var node = {
+//	data: null,
+//	left: null,
+//	right: null,
+//	parent: null
+//}
+//
+//function makeNode(data, left, right) {
+//	var newNode = Object.assign(Object.create(node), {
+//		data: data,
+//		left: left,
+//		right: right
+//	});
+//
+//	if (newNode.left) {
+//		// Set this node as parent of left child
+//		Object.assign(newNode.left, {parent: newNode});
+//	}
+//
+//	if (newNode.right) {
+//		// Set this node as parent of right child
+//		Object.assign(newNode.right, {parent: newNode});
+//	}
+//
+//	return newNode;
+//}
+function Node() {
+	this.data = null;
+	this.parent = null;
+	this.left = null;
+	this.right = null;
+
+	return this;
 }
 
 function makeNode(data, left, right) {
-	var newNode = Object.assign(Object.create(node), {
-		data: data,
-		left: left,
-		right: right
-	});
+	var node = new Node();
+	node.data = data;
+	node.left = left;
+	node.right = right;
 
-	if (newNode.left) {
+	if (node.left) {
 		// Set this node as parent of left child
-		Object.assign(newNode.left, {parent: newNode});
+		node.left.parent = node;
 	}
 
-	if (newNode.right) {
+	if (node.right) {
 		// Set this node as parent of right child
-		Object.assign(newNode.right, {parent: newNode});
+		node.right.parent = node;
 	}
 
-	return newNode;
+	return node;
 }
-//function Node() {
-//	this.data = null;
-//	this.parent = null;
-//	this.left = null;
-//	this.right = null;
-//
-//	return this;
-//}
-
-//function makeNode(data, left, right) {
-//	var node = new Node();
-//	node.data = data;
-//	node.left = left;
-//	node.right = right;
-//
-//	if (node.left) {
-//		// Set this node as parent of left child
-//		node.left.parent = node;
-//	}
-//
-//	if (node.right) {
-//		// Set this node as parent of right child
-//		node.right.parent = node;
-//	}
-//
-//	return node;
-//}
 
 function constructTree() {
 	return makeNode(1, // root
@@ -70,8 +70,10 @@ function constructTree() {
 				makeNode(12, null, null),
 				makeNode(13, null, null))));
 }
-
-
+{	key: value,
+	key2: value2
+}
+[value, value]
 function returnNode(node, array) {
 	if ( node.data ) {
 		array.push(node.data);
@@ -121,7 +123,8 @@ function printLevelOrder(root) {
 
 
 }
-// O(n) 
+// 1, 2, 3, 4, 5, 6, 7, 8, 9,
+// O(n ^ 2)
 
 var root1 = constructTree();
 printLevelOrder(root1);
