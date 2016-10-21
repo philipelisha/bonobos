@@ -1,3 +1,5 @@
+'use strict';
+
 /*
  * Backers may make new pledges, adjust the amount of an existing pledge, or cancel
  * their pledge.

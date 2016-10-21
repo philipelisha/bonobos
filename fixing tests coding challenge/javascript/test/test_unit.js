@@ -1,3 +1,5 @@
+'use strict';
+
 const challenge = require('lib/challenge')
 const fixtures = require('test/fixtures')
 const CategoryStats = require('lib/challenge/models/category_stats').CategoryStats

@@ -1,3 +1,5 @@
+'use strict';
+
 var exports = module.exports = {}
 
 const _ = require('lodash')
@@ -9,7 +11,7 @@ const CategoryStats = require('lib/challenge/models/category_stats').CategorySta
  * remaining tests.
  */
 exports.hello = function() {
-  // return 'world'
+  return 'world'
 }
 
 /**
