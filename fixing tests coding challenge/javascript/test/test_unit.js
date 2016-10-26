@@ -33,7 +33,7 @@ test('003 select ids of art category projects', () => {
   expect(
     challenge.selectIdsOfArtCategoryProjects(projects)
   )
-  .toEqual([199, 845])
+  .toEqual([199, 668, 845, 910]) // THIS WAS MISSING SOME IDS
 })
 
 test('004 total amount pledged', () => {

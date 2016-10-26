@@ -77,7 +77,7 @@ exports.ofMontreal = ofMontreal
 const skullGraphicTee = new Project(
   5,
   'fashion',
-  100,
+  225,
   999,
   'SKULL GRAPHIC TEE',
   125

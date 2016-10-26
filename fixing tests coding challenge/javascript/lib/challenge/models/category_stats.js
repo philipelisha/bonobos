@@ -26,6 +26,7 @@ exports.CategoryStats = class Project {
     this.meanBackers = meanBackers
     this.meanPledged = meanPledged
     this.totalBackers = totalBackers
+    this.totalPledged = totalPledged
     this.totalProjects = totalProjects
   }
 }
