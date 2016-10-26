@@ -77,7 +77,7 @@ exports.ofMontreal = ofMontreal
 const skullGraphicTee = new Project(
   5,
   'fashion',
-  225,
+  225, // The goal had the wrong value
   999,
   'SKULL GRAPHIC TEE',
   125

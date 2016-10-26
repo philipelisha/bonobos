@@ -66,62 +66,44 @@ exports.totalAmountPledged = function(pledges) {
  * projects: [Project]
  * returns: [CategoryStats]
  */
- // O(n * 2)
+ const returnNewCategoryStats = function(p,s) {
+ 	const length = s ? s.totalProjects + 1 : 1;
+	return new CategoryStats (
+		s ? s.category : p.category,
+		s ? Math.floor((s.meanBackers + p.backers) / length) : p.backers,
+		s ? Math.floor((s.meanPledged + p.pledged) / length) : p.pledged,
+		s ? s.totalBackers + p.backers : p.backers,
+		s ? s.totalPledged + p.pledged : p.pledged,
+		length
+	)
+ }
 exports.categoryStatsSortedByCategoryName = function(projects) {
-	/*return projects.reduce((stats, p) => {
-		let newCategory = false, trueAdd = false;
-		stats.map((s) => {
+	// totalPledged was missing from CategoryStats, I altered the model to fix this.
+	return projects.reduce((stats, p) => {
+		let newCategory = false, categoryExists = false;
+
+		stats = stats.map((s) => {
 			if ( s.category === p.category ) {
-				trueAdd = true;
-				let length = s.totalProjects + 1;
-				return new CategoryStats (
-					s.category,
-					s.meanBackers + p.backers / length,
-					s.meanPledged + p.pledged / length,
-					s.totalBackers + p.backers,
-					s.totalPledged + p.pledged,
-					length
-				)
+				categoryExists = true;
+				newCategory = false;
+
+				return returnNewCategoryStats(p,s);
 			} else {
-				newCategory = trueAdd ? false : true;
+				newCategory = !categoryExists;
+
 				return s;
 			}
-		})
+
+		});
+
 		if ( newCategory || stats.length === 0 ) {
-			stats.push(new CategoryStats (
-				p.category,
-				p.backers,
-				p.pledged,
-				p.backers,
-				p.pledged,
-				1
-			));
+			stats.push(returnNewCategoryStats(p));
 		}
-		console.log('THE STATS', stats)
 
 		return stats;
 		
-	}, []).sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0) )*/
+	}, []).sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0) )
 
-	// CategoryStats was missing the totalPledged value
-	let sortedProjects = {},
-		sortedCalculatedProjects = [];
-	projects.forEach((p) => sortedProjects[p.category] ? sortedProjects[p.category].push(p) : sortedProjects[p.category] = [p])
-	for ( let cat in sortedProjects ) {
-		let length = sortedProjects[cat].length;
-		let newStats = new CategoryStats(
-			cat,
-			Math.floor(sortedProjects[cat].reduce((total, p) => total + p.backers, 0) / length),
-			Math.floor(sortedProjects[cat].reduce((total, p) => total + p.pledged, 0) / length),
-			sortedProjects[cat].reduce((total, p) => total + p.backers, 0),
-			sortedProjects[cat].reduce((total, p) => total + p.pledged, 0),
-			length,
-		)
-		sortedCalculatedProjects.push(newStats);
-	}
-
-	sortedCalculatedProjects.sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0))
-	return sortedCalculatedProjects;
 }
 
 /*
@@ -140,12 +122,12 @@ exports.categoryStatsSortedByCategoryName = function(projects) {
 */
 exports.hadProjectReachedGoalAfterEachPledgeChange = function(project, pledgeChanges) {
 	// The goal for skull graphic tree is 100 and the amount pledged is 125. 
-	// I think the test was written thinking that the Goal was 225. That would make the expected values work.
+	// I think the test was written thinking that the Goal was 225. That would make the expected boolean values work.
 	// Each of the pledge changes in the test will never bring it to below 100 so it will return true for each one. 
 	// I alterred the goal in fixtures to reflect this.
 
-	let goal = project.goal,
-		pledged = project.pledged;
+	const goal = project.goal;
+	let pledged = project.pledged;
 	return pledgeChanges.map((p) => {
 		pledged += p.delta;
 		return pledged >= goal;
@@ -209,7 +191,7 @@ exports.recommendProjectsFromSameCategory = function(project, projects) {
  */
 exports.recommendationFeed = function(backedProjects, allProjects) {
 	let backedProjectsIds = backedProjects.map((p) => p.id),
-		backedProjectsCategories = backedProjects.map((p) => p.category)
+		backedProjectsCategories = backedProjects.map((p) => p.category);
 	return allProjects.filter((ap) => {
 		return backedProjectsIds.indexOf(ap.id) === -1 && backedProjectsCategories.indexOf(ap.category) !== -1;
 	}).sort((a,b) => (a.backers < b.backers) ? 1 : ((b.backers > a.backers) ? -1 : 0));
