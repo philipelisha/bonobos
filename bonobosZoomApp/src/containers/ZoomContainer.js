@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { zoomIn, zoomOut } from '../actions'
-import ZoomButton from '../components/ZoomButton'
+import ZoomButtons from '../components/ZoomButtons'
 
 const mapStateToProps = (state) => {
 	return {
@@ -22,4 +22,4 @@ const mapDispatchToProps = (dispatch) => {
 export const AccountsContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(ZoomButton)
+)(ZoomButtons)

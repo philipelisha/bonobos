@@ -1,4 +1,4 @@
-import { ZOOM_IN, ZOOM_OUT, MOVE_MOUSE, TOGGLE_DRAG, UPDATE_DRAG } from '../actions';
+import { TOGGLE_ZOOM, MOVE_MOUSE, TOGGLE_DRAG, UPDATE_DRAG } from '../actions';
 import { combineReducers } from 'redux';
 
 function mousePosition(state = [], action) {
@@ -16,15 +16,10 @@ function zoom(state = {
 	dragPosition: [0,0]
 }, action) {
 	switch (action.type) {
-		case ZOOM_IN:
+		case TOGGLE_ZOOM:
 			return {
 				...state,
-				zoomed: true
-			}
-		case ZOOM_OUT:
-			return {
-				...state,
-				zoomed: false
+				zoomed: state.zoomed
 			}
 		case TOGGLE_DRAG:
 			return {

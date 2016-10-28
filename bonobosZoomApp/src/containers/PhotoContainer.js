@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { zoomOut, toggleDrag } from '../actions'
-import ZoomButton from '../components/ZoomButton'
+import PhotoWrapper from '../components/PhotoWrapper'
 
 const mapStateToProps = (state) => {
 	return {
@@ -24,4 +24,4 @@ const mapDispatchToProps = (dispatch) => {
 export const AccountsContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(ZoomButton)
+)(PhotoWrapper)

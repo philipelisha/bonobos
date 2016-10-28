@@ -1,14 +1,12 @@
 import React from 'react';
-import ZoomContainer from "./ZoomContainer";
-import PhotoContainer from "./PhotoContainer";
+import ZoomContainer from "../containers/ZoomContainer";
+import PhotoContainer from "../containers/PhotoContainer";
 
 export const Container = () => {
-  render() {
-    return (
+	return (
 		<div className="ui container">
 			<ZoomContainer />
 			<PhotoContainer />
 		</div>
-    );
-  }
+	);
 }

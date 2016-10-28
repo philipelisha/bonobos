@@ -1,11 +1,9 @@
 import React from 'react';
 
-export const Container = () => {
-  render() {
-    return (
+export const ZoomButtons = () => {
+	return (
 		<div className="ui container">
 			
 		</div>
-    );
-  }
+	);
 }
