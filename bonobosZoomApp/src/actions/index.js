@@ -2,31 +2,30 @@
  * action types
  */
 
-export const CHANGE_ACCOUNTS = 'CHANGE_ACCOUNTS';
-export const DEPOSIT = 'DEPOSIT';
-export const WITHDRAW = 'WITHDRAW';
+export const ZOOM_IN = 'ZOOM_IN';
+export const ZOOM_OUT = 'ZOOM_OUT';
+export const MOVE_MOUSE = 'MOVE_MOUSE';
+export const TOGGLE_DRAG = 'TOGGLE_DRAG';
+export const UPDATE_DRAG = 'UPDATE_DRAG';
 
 /*
  * action creators
  */
 
-export const changeAccounts = (id) => {
+export const zoomIn = () => {
 	return {
-		type: 'CHANGE_ACCOUNTS',
-		id
+		type: 'ZOOM_IN'
 	}
 }
 
-export const deposit = (transactionData) => {
+export const zoomOut = () => {
 	return {
-		type: 'DEPOSIT',
-		transactionData
+		type: 'ZOOM_OUT'
 	}
 }
 
-export const withdraw = (transactionData) => {
+export const moveMouse = () => {
 	return {
-		type: 'WITHDRAW',
-		transactionData
+		type: 'MOVE_MOUSE'
 	}
 }

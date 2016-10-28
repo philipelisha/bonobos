@@ -1,65 +1,48 @@
-import { CHANGE_ACCOUNTS, DEPOSIT, WITHDRAW } from '../actions';
-import { dataStructure } from "../dataStructure";
+import { ZOOM_IN, ZOOM_OUT, MOVE_MOUSE, TOGGLE_DRAG, UPDATE_DRAG } from '../actions';
 import { combineReducers } from 'redux';
 
-const InitialAccountId = dataStructure.selectedAccountId;
-
-function selectedAccountId(state = InitialAccountId, action) {
+function mousePosition(state = [], action) {
 	switch (action.type) {
-		case CHANGE_ACCOUNTS:
-			return action.id
+		case MOVE_MOUSE:
+			return action.pos
 		default:
 			return state
   }
 }
 
-function accounts(state = [], action) {
+function zoom(state = {
+	zoomed: false,
+	dragActive: false,
+	dragPosition: [0,0]
+}, action) {
 	switch (action.type) {
-		case DEPOSIT:
-			return state.map((account) => {
-				if (account.id === action.transactionData.id) {
-					return Object.assign({}, account, {
-						history: [
-							{
-								date: action.transactionData.date,
-								description: "Deposit",
-								amount: action.transactionData.amount,
-								pending: true
-							},
-							...account.history
-						]
-					})
-				}
-
-				return account
-		  	})
-		case WITHDRAW:
-			return state.map((account) => {
-				if (account.id === action.transactionData.id) {
-					return Object.assign({}, account, {
-						history: [
-							{
-								date: action.transactionData.date,
-								description: "Withdraw",
-								amount: action.transactionData.amount,
-								pending: false
-							},
-							...account.history
-						]
-					})
-				}
-
-				return account
-		  	})
+		case ZOOM_IN:
+			return {
+				...state,
+				zoomed: true
+			}
+		case ZOOM_OUT:
+			return {
+				...state,
+				zoomed: false
+			}
+		case TOGGLE_DRAG:
+			return {
+				...state,
+				dragActive: !state.dragActive
+			}
+		case UPDATE_DRAG:
+			return {
+				...state,
+				dragPosition: action.pos
+			}
 		default:
 	  		return state
   }
 }
 
 
-const bankingApp = combineReducers({
-	selectedAccountId,
-	accounts
-})
-
-export default bankingApp
+export const zoomApp = combineReducers({
+	mousePosition,
+	zoom
+});

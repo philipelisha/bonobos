@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import Header from "./Header";
-import Container from "./Container";
+import React from 'react';
+import { Container } from "./Container";
 
-class App extends Component {
+export const App = () => {
 	render() {
 		return (
 			<div className="ui two column stackable grid">
@@ -16,5 +15,3 @@ class App extends Component {
 		);
 	}
 }
-
-export default App;
