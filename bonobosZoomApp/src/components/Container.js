@@ -1,20 +1,11 @@
-import React, { Component } from 'react';
-import AccountsContainer from "../containers/AccountsContainer";
-import AccountInformation from "./AccountInformation";
+import React from 'react';
 
-class Container extends Component {
+export const Container = () => {
   render() {
     return (
-		<div className="ui two column stackable grid container">
-			<div className="six wide column">
-				<AccountsContainer />
-			</div>
-			<div className="ten wide column">
-				<AccountInformation />
-			</div>
+		<div className="container">
+
 		</div>
     );
   }
 }
-
-export default Container;

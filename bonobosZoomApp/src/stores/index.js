@@ -1,8 +1,7 @@
 import { createStore } from 'redux';
-import bankingApp from '../reducers';
-import { dataStructure } from "../dataStructure";
+import zoomApp from '../reducers';
 
-export const store = createStore(bankingApp, dataStructure);
+export const store = createStore(zoomApp);
 
 // Log the initial state
 console.log(store.getState())
