@@ -7,7 +7,7 @@ export const PhotoWrapper = ({imgDimentions, zoomed, dragActive, dragPosition, t
 		    height: imgDimentions[1] + "px",
 		    transform: zoomed ? dragedPosition : "matrix(1, 0, 0, 1, 0, 0)",
 		    backfaceVisibility: "hidden",
-		    transformOrigin: 50% 50% 0px,
+		    transformOrigin: "50% 50% 0px",
 		    transition: zoomed ? "none" : "transform 350ms ease-in-out"
 	}
 	return (
