@@ -1,25 +1,22 @@
 import { connect } from 'react-redux';
-import { zoomIn, zoomOut } from '../actions'
-import ZoomButtons from '../components/ZoomButtons'
+import { toggleZoom } from '../actions';
+import { ZoomButtons } from '../components/ZoomButtons';
 
 const mapStateToProps = (state) => {
 	return {
-		zoomed: state.zoomed
+		zoomed: state.zoom.zoomed
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		zoomIn: () => {
-			dispatch(zoomIn())
-		},
-		zoomOut: () => {
-			dispatch(zoomOut())
-		},
+		toggleZoom: () => {
+			dispatch(toggleZoom())
+		}
 	}
 }
 
-export const AccountsContainer = connect(
+export const ZoomContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(ZoomButtons)

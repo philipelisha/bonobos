@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
-import { zoomOut, toggleDrag } from '../actions'
-import PhotoWrapper from '../components/PhotoWrapper'
+import { toggleZoom, toggleDrag } from '../actions';
+import { PhotoWrapper } from '../components/PhotoWrapper';
 
 const mapStateToProps = (state) => {
 	return {
-		zoomed: state.zoomed,
-		dragActive: state.dragActive,
-		dragPosition: state.dragPosition
+		zoomed: state.zoom.zoomed,
+		dragActive: state.zoom.dragActive,
+		dragPosition: state.zoom.dragPosition
 	}
 }
 
@@ -15,13 +15,13 @@ const mapDispatchToProps = (dispatch) => {
 		toggleDrag: () => {
 			dispatch(toggleDrag())
 		},
-		zoomOut: () => {
-			dispatch(zoomOut())
+		toggleZoom: () => {
+			dispatch(toggleZoom())
 		},
 	}
 }
 
-export const AccountsContainer = connect(
+export const PhotoContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(PhotoWrapper)

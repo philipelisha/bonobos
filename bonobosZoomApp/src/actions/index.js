@@ -3,7 +3,6 @@
  */
 
 export const TOGGLE_ZOOM = 'TOGGLE_ZOOM';
-export const ZOOM_OUT = 'ZOOM_OUT';
 export const MOVE_MOUSE = 'MOVE_MOUSE';
 export const TOGGLE_DRAG = 'TOGGLE_DRAG';
 export const UPDATE_DRAG = 'UPDATE_DRAG';
@@ -12,7 +11,7 @@ export const UPDATE_DRAG = 'UPDATE_DRAG';
  * action creators
  */
 
-export const zoomIn = () => {
+export const toggleZoom = () => {
 	return {
 		type: 'TOGGLE_ZOOM'
 	}

@@ -1,8 +1,8 @@
 import React from 'react';
 
-export const PhotoWrapper = () => {
+export const PhotoWrapper = ({zoomed, dragActive, dragPosition, toggleDrag, toggleZoom}) => {
 	return (
-		<div className="ui one column stackable grid">
+		<div className="ui container">
 			
 		</div>
 	);

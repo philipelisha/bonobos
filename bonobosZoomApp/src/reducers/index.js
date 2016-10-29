@@ -19,7 +19,7 @@ function zoom(state = {
 		case TOGGLE_ZOOM:
 			return {
 				...state,
-				zoomed: state.zoomed
+				zoomed: !state.zoomed
 			}
 		case TOGGLE_DRAG:
 			return {
