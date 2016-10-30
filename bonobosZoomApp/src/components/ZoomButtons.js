@@ -8,10 +8,10 @@ export const ZoomButtons = ({zoomed, toggleZoom}) => {
 	const zoomOutClass = zoomed ? "zoomable_image---icon" : "zoomable_image---icon zoomable_image---disabledLink";
 	return (
 		<div className="zoomable_image---icons">
-			<a className={zoomInClass} disabled={zoomed} onClick={toggleZoom}>
+			<a className={zoomInClass} onClick={!zoomed ? toggleZoom : null}>
 				<ZoomIn />
 			</a>
-			<a className={zoomOutClass} disabled={!zoomed} onClick={toggleZoom}>
+			<a className={zoomOutClass} onClick={zoomed ? toggleZoom : null}>
 				<ZoomOut />
 			</a>
 		</div>

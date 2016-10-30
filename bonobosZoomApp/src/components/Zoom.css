@@ -19,6 +19,11 @@
 	cursor: grab;
 }
 
+.zoomable_image--grabbingCursor {
+	cursor: -webkit-grabbing;
+	cursor: grabbing;
+}
+
 .zoomable_image {
 	z-index: 1;
 }

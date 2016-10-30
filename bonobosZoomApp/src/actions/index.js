@@ -18,9 +18,10 @@ export const toggleZoom = () => {
 	}
 }
 
-export const moveMouse = () => {
+export const moveMouse = (pos) => {
 	return {
-		type: 'MOVE_MOUSE'
+		type: 'MOVE_MOUSE',
+		pos
 	}
 }
 
@@ -37,7 +38,7 @@ export const updateDrag = (pos) => {
 	}
 }
 
-export const screenResize = (width, height) => {
+export const screenResize = ([width, height]) => {
     return {
         type: SCREEN_RESIZE,
         screenWidth: width,

@@ -7,7 +7,7 @@ import { App } from './components/App';
 import { store } from "./stores";
 
 window.addEventListener('resize', () => {
-    store.dispatch(screenResize(window.innerWidth, window.innerHeight));
+    store.dispatch(screenResize([window.innerWidth, window.innerHeight]));
 });
 
 render (

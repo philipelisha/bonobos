@@ -1,3 +1,5 @@
+
+
 .zoomable_image---icons {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -14,18 +16,26 @@
 	top: 96px;
 	z-index:150;
 }
-.zoomable_image---disabledLink {
-	cursor: default;
-}
+
 .zoomable_image---icon {
 	background: rgba(244, 244, 244, 0.5);
-	border-radius: 50%;
-	color: #232323;
-	cursor: pointer;
-	font-size: 34px;
-	height: 50px;
-	margin-bottom: 10px;
-	padding: 10px 13px;
-	text-align: center;
-	width: 50px;
+    border-radius: 50%;
+    color: #232323;
+    cursor: pointer;
+    font-size: 34px;
+    height: 35px;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 35px;
+}
+
+.zoomable_image---disabledLink {
+	opacity:.4;
+	cursor: default;
+}
+
+.zoomable_image---icon svg {
+    width: 25px;
+    height: 25px;
 }
