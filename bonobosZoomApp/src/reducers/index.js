@@ -1,5 +1,8 @@
-import { TOGGLE_ZOOM, MOVE_MOUSE, TOGGLE_DRAG, UPDATE_DRAG } from '../actions';
+import { TOGGLE_ZOOM, MOVE_MOUSE, TOGGLE_DRAG, UPDATE_DRAG, SCREEN_RESIZE } from '../actions';
 import { combineReducers } from 'redux';
+
+const screenWidth = typeof window === 'object' ? window.innerWidth : null;
+const screenHeight = typeof window === 'object' ? window.innerHeight : null;
 
 function mousePosition(state = [], action) {
 	switch (action.type) {
@@ -8,6 +11,22 @@ function mousePosition(state = [], action) {
 		default:
 			return state
   }
+}
+
+function screenSize(state = {
+	screenWidth,
+	screenHeight
+}, action) {
+	switch (action.type) {
+		case SCREEN_RESIZE:
+            return {
+            	...state,
+                screenWidth: action.screenWidth,
+                screenHeight: action.screenHeight
+            }
+        default:
+        	return state
+	}
 }
 
 function zoom(state = {
@@ -39,5 +58,6 @@ function zoom(state = {
 
 export const zoomApp = combineReducers({
 	mousePosition,
-	zoom
+	zoom,
+	screenSize
 });

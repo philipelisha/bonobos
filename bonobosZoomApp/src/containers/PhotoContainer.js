@@ -6,7 +6,9 @@ const mapStateToProps = (state) => {
 	return {
 		zoomed: state.zoom.zoomed,
 		dragActive: state.zoom.dragActive,
-		dragPosition: state.zoom.dragPosition
+		dragPosition: state.zoom.dragPosition,
+		screenWidth: state.screenSize.screenWidth,
+		screenHeight: state.screenSize.screenHeight
 	}
 }
 
