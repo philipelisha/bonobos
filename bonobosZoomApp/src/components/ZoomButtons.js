@@ -1,20 +1,18 @@
 import React from 'react';
 import "./ZoomButtons.css";
-import zoomIn from "./zoom-in.svg"
-import zoomOut from "./zoom-out.svg"
+import { ZoomIn } from "./ZoomIn"
+import { ZoomOut } from "./ZoomOut"
 
 export const ZoomButtons = ({zoomed, toggleZoom}) => {
+	const zoomInClass =  zoomed ? "zoomable_image---icon zoomable_image---disabledLink" : "zoomable_image---icon";
+	const zoomOutClass = zoomed ? "zoomable_image---icon" : "zoomable_image---icon zoomable_image---disabledLink";
 	return (
 		<div className="zoomable_image---icons">
-			<a class={zoomInClass}>
-				<div>
-					
-				</div>
+			<a className={zoomInClass} disabled={zoomed} onClick={toggleZoom}>
+				<ZoomIn />
 			</a>
-			<a class={zoomOutClass}>
-				<div>
-					
-				</div>				
+			<a className={zoomOutClass} disabled={!zoomed} onClick={toggleZoom}>
+				<ZoomOut />
 			</a>
 		</div>
 	);
