@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import "./Zoom.css";
-import { ZoomContainer } from "../containers/ZoomContainer";
+import { ZoomButtons } from '../components/ZoomButtons';
 import { debounce } from "../helpers/debounce";
 
 export class PhotoWrapper extends Component {
@@ -8,6 +8,7 @@ export class PhotoWrapper extends Component {
 		super(props);
 		
 		this.state = {
+			noTransition: false,
 			initialDragPosX: 0,
 			initialDragPosY: 0,
 			dragActive: false
@@ -18,16 +19,24 @@ export class PhotoWrapper extends Component {
 		this.moveMouse = this.moveMouse.bind(this);
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if ( nextProps.zoomed ) {
+			setTimeout(()=>this.setState({noTransition: true}), 250)
+		} else {
+			this.setState({noTransition: false})
+		}
+	}
+
 	moveMouse(e) {
-		const { moveMouse, updateDrag, dragPosition, mousePosition } = this.props;
+		const { moveMouse, updateDrag, screenHeight } = this.props;
 		const { initialDragPosX, initialDragPosY, dragActive } = this.state;
 		const newPos = [e.clientX, e.clientY];
 		
 		if ( dragActive ) {
 			let newDragPosX = (newPos[0] - initialDragPosX);
+			newDragPosX = newDragPosX > screenHeight ? screenHeight : (newDragPosX < (screenHeight * -1) ? screenHeight * -1 : newDragPosX);
 			let newDragPosY = (newPos[1] - initialDragPosY);
-			console.log('newDragPosX', newDragPosX);
-			console.log('newDragPosY', newDragPosY);
+			newDragPosY = newDragPosY > screenHeight ? screenHeight : (newDragPosY < (screenHeight * -1) ? screenHeight * -1 : newDragPosY);
 			debounce(updateDrag([newDragPosX, newDragPosY]), 0);
 		}
 
@@ -36,7 +45,7 @@ export class PhotoWrapper extends Component {
 
 	startDrag(e) {
 		e.preventDefault();
-		const { zoomed, dragPosition, mousePosition } = this.props;
+		const { dragPosition, mousePosition, zoomed } = this.props;
 		const { dragActive } = this.state;
 
 		if ( zoomed && !dragActive ) {
@@ -64,8 +73,8 @@ export class PhotoWrapper extends Component {
 	}
 
 	render() {
-		const { screenHeight, screenWidth, zoomed, dragPosition, toggleZoom, moveMouse } = this.props;
-		const { dragActive } = this.state;
+		const { screenHeight, screenWidth, dragPosition, toggleZoom, zoomed } = this.props;
+		const { dragActive, noTransition } = this.state;
 		const dragedPosition = "matrix(3, 0, 0, 3, " + dragPosition[0] + ", " + dragPosition[1] + ")";
 		const wrapperStyle = {
 			    width: screenWidth + "px",
@@ -79,7 +88,7 @@ export class PhotoWrapper extends Component {
 			    transform: zoomed ? dragedPosition : "matrix(1, 0, 0, 1, 0, 0)",
 			    backfaceVisibility: "hidden",
 			    transformOrigin: "50% 50% 0px",
-			    transition: !zoomed ? "transform 350ms ease-in-out" : null
+			    transition: !noTransition ? "transform 350ms ease-in-out" : "none"
 		}
 		const imgWrapperClass = !zoomed ? "zoomable_image--zoomInCursor" : (dragActive ? "zoomable_image--grabbingCursor" : "zoomable_image--grabCursor");
 		const imgStyle = {
@@ -89,22 +98,20 @@ export class PhotoWrapper extends Component {
 		return (
 			<div style={wrapperStyle} className="ui container zoomable_image--component">
 				<div 
-				style={imgWrapperStyle} 
-				className={imgWrapperClass} 
-				onMouseMove={this.moveMouse}
-				onMouseDown={this.startDrag}
-				onClick={!zoomed ? toggleZoom : null}>
-					<div onDoubleClick={!zoomed ? toggleZoom : null}>
-						<img 
-							className="zoomable_image" 
-							width={screenHeight} 
-							height={screenHeight} 
-							style={imgStyle} 
-							role="presentation"
-							src="https://bonobos-prod-s3.imgix.net/products/12465/original/PANT_WashedChinos_TheKhakis_hero1.jpg?h=7000&w=7000" />
-					</div>
+					style={imgWrapperStyle} 
+					className={imgWrapperClass} 
+					onMouseMove={this.moveMouse}
+					onMouseDown={this.startDrag}
+					onClick={!zoomed ? toggleZoom : null}>
+					<img 
+						className="zoomable_image" 
+						width={screenHeight} 
+						height={screenHeight} 
+						style={imgStyle} 
+						role="presentation"
+						src="https://bonobos-prod-s3.imgix.net/products/12465/original/PANT_WashedChinos_TheKhakis_hero1.jpg?h=7000&w=7000" />
 				</div>
-				<ZoomContainer />
+				<ZoomButtons zoomed={zoomed} toggleZoom={toggleZoom} />
 			</div>
 		);
 	}
