@@ -28,13 +28,14 @@ export class PhotoWrapper extends Component {
 	}
 
 	moveMouse(e) {
-		const { moveMouse, updateDrag, screenHeight } = this.props;
+		const { moveMouse, updateDrag, screenHeight, screenWidth } = this.props;
 		const { initialDragPosX, initialDragPosY, dragActive } = this.state;
 		const newPos = [e.clientX, e.clientY];
+		const xBounds = (screenWidth - screenHeight)/2;
 		
 		if ( dragActive ) {
 			let newDragPosX = (newPos[0] - initialDragPosX);
-			newDragPosX = newDragPosX > screenHeight ? screenHeight : (newDragPosX < (screenHeight * -1) ? screenHeight * -1 : newDragPosX);
+			newDragPosX = newDragPosX > xBounds ? xBounds : (newDragPosX < (xBounds * -1) ? xBounds * -1 : newDragPosX);
 			let newDragPosY = (newPos[1] - initialDragPosY);
 			newDragPosY = newDragPosY > screenHeight ? screenHeight : (newDragPosY < (screenHeight * -1) ? screenHeight * -1 : newDragPosY);
 			debounce(updateDrag([newDragPosX, newDragPosY]), 0);

@@ -11,16 +11,20 @@
 }
 
 .zoomable_image--zoomInCursor {
+	cursor: -webkit-zoom-in;
+	cursor: -moz-zoom-in;
 	cursor: zoom-in;
 }
 
 .zoomable_image--grabCursor {
 	cursor: -webkit-grab;
+	cursor: -moz-grab;
 	cursor: grab;
 }
 
 .zoomable_image--grabbingCursor {
 	cursor: -webkit-grabbing;
+	cursor: -moz-grabbing;
 	cursor: grabbing;
 }
 
