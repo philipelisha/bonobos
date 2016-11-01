@@ -5,6 +5,8 @@
 export const TOGGLE_ZOOM = 'TOGGLE_ZOOM';
 export const MOVE_MOUSE = 'MOVE_MOUSE';
 export const UPDATE_DRAG = 'UPDATE_DRAG';
+export const SET_TRANSITION = 'SET_TRANSITION';
+export const SET_DRAG = 'SET_DRAG';
 export const SCREEN_RESIZE = 'SCREEN_RESIZE';
 
 /*
@@ -28,6 +30,21 @@ export const updateDrag = (pos) => {
 	return {
 		type: 'UPDATE_DRAG',
 		pos
+	}
+}
+
+export const setTransition = (val) => {
+	return {
+		type: 'SET_TRANSITION',
+		val
+	}
+}
+
+export const setDrag = (val, initialDragPos) => {
+	return {
+		type: 'SET_DRAG',
+		val,
+		initialDragPos
 	}
 }
 

@@ -1,4 +1,4 @@
-import { TOGGLE_ZOOM, MOVE_MOUSE, UPDATE_DRAG, SCREEN_RESIZE } from '../actions';
+import { TOGGLE_ZOOM, MOVE_MOUSE, UPDATE_DRAG, SCREEN_RESIZE, SET_TRANSITION, SET_DRAG } from '../actions';
 import { combineReducers } from 'redux';
 
 const screenWidth = typeof window === 'object' ? window.innerWidth : null;
@@ -30,7 +30,10 @@ function screenSize(state = {
 
 function zoom(state = {
 	zoomed: false,
-	dragPosition: [0,0]
+	dragPosition: [0,0],
+	noTransition: false,
+	dragActive: false,
+	initialDragPos: [0,0]
 }, action) {
 	switch (action.type) {
 		case TOGGLE_ZOOM:
@@ -41,6 +44,15 @@ function zoom(state = {
 		case UPDATE_DRAG:
 			return Object.assign({}, state, {
 				dragPosition: action.pos
+			})
+		case SET_TRANSITION:
+			return Object.assign({}, state, {
+				noTransition: action.val
+			})
+		case SET_DRAG:
+			return Object.assign({}, state, {
+				dragActive: action.val,
+				initialDragPos: action.initialDragPos
 			})
 		default:
 	  		return state

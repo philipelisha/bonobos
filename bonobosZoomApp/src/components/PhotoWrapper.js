@@ -6,13 +6,6 @@ import { debounce } from "../helpers/debounce";
 export class PhotoWrapper extends Component {
 	constructor(props) {
 		super(props);
-		
-		this.state = {
-			noTransition: false,
-			initialDragPosX: 0,
-			initialDragPosY: 0,
-			dragActive: false
-		}
 
 		this.startDrag = this.startDrag.bind(this);
 		this.endDrag = this.endDrag.bind(this);
@@ -20,22 +13,38 @@ export class PhotoWrapper extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		const { setTransition } = this.props;
 		if ( nextProps.zoomed ) {
-			setTimeout(()=>this.setState({noTransition: true}), 250)
+			setTimeout(() => setTransition(true), 350)
 		} else {
-			this.setState({noTransition: false})
+			setTransition(false)
+		}
+	}
+
+	startDrag(e) {
+		e.preventDefault();
+		const { dragPosition, mousePosition, zoomed, dragActive, setDrag } = this.props;
+
+		if ( zoomed && !dragActive ) {
+			const initialDragPosX = mousePosition[0] - dragPosition[0];
+			const initialDragPosY = mousePosition[1] - dragPosition[1];
+			setDrag(true, [initialDragPosX, initialDragPosY]);
+
+			window.addEventListener('mouseup', () => {
+				this.endDrag();
+			});
 		}
 	}
 
 	moveMouse(e) {
-		const { moveMouse, updateDrag, screenHeight, screenWidth } = this.props;
-		const { initialDragPosX, initialDragPosY, dragActive } = this.state;
+		const { moveMouse, updateDrag, screenHeight, dragActive, initialDragPos } = this.props;
 		const newPos = [e.clientX, e.clientY];
-		const xBounds = (screenWidth - screenHeight)/2;
-		
+		const initialDragPosX = initialDragPos[0];
+		const initialDragPosY = initialDragPos[1];
+
 		if ( dragActive ) {
 			let newDragPosX = (newPos[0] - initialDragPosX);
-			newDragPosX = newDragPosX > xBounds ? xBounds : (newDragPosX < (xBounds * -1) ? xBounds * -1 : newDragPosX);
+			newDragPosX = newDragPosX > screenHeight ? screenHeight : (newDragPosX < (screenHeight * -1) ? screenHeight * -1 : newDragPosX);
 			let newDragPosY = (newPos[1] - initialDragPosY);
 			newDragPosY = newDragPosY > screenHeight ? screenHeight : (newDragPosY < (screenHeight * -1) ? screenHeight * -1 : newDragPosY);
 			debounce(updateDrag([newDragPosX, newDragPosY]), 0);
@@ -44,29 +53,9 @@ export class PhotoWrapper extends Component {
 		moveMouse(newPos);
 	}
 
-	startDrag(e) {
-		e.preventDefault();
-		const { dragPosition, mousePosition, zoomed } = this.props;
-		const { dragActive } = this.state;
-
-		if ( zoomed && !dragActive ) {
-			this.setState({
-				dragActive: true,
-				initialDragPosX: mousePosition[0] - dragPosition[0],
-				initialDragPosY: mousePosition[1] - dragPosition[1]
-			});
-
-			window.addEventListener('mouseup', () => {
-				this.endDrag();
-			});
-		}
-	}
-
 	endDrag() {
-		this.setState({
-			dragActive: false,
-			initialDragPos: [0,0]
-		});
+		const { setDrag } = this.props;
+		setDrag(false, [0,0]);
 		
 		window.removeEventListener('mouseup', () => {
 			this.endDrag();
@@ -74,18 +63,18 @@ export class PhotoWrapper extends Component {
 	}
 
 	render() {
-		const { screenHeight, screenWidth, dragPosition, toggleZoom, zoomed } = this.props;
-		const { dragActive, noTransition } = this.state;
-		const dragedPosition = "matrix(3, 0, 0, 3, " + dragPosition[0] + ", " + dragPosition[1] + ")";
+		const { screenHeight, screenWidth, dragPosition, toggleZoom, zoomed, noTransition, dragActive } = this.props;
+
+		const dragedPosition = `matrix(3, 0, 0, 3, ${dragPosition[0]}, ${dragPosition[1]})`;
 		const wrapperStyle = {
-			    width: screenWidth + "px",
-			    height: screenHeight + "px",
+			    width: `${screenWidth}px`,
+			    height: `${screenHeight}px`,
 			    overflow: "hidden",
 			    position: "relative"
 		}
 		const imgWrapperStyle = {
-			    width: screenHeight + "px",
-			    height: screenHeight + "px",
+			    width: `${screenHeight}px`,
+			    height: `${screenHeight}px`,
 			    transform: zoomed ? dragedPosition : "matrix(1, 0, 0, 1, 0, 0)",
 			    backfaceVisibility: "hidden",
 			    transformOrigin: "50% 50% 0px",
