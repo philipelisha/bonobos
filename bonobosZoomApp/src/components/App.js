@@ -4,9 +4,9 @@ import { Container } from "./Container";
 export const App = () => {
 	return (
 		<div className="ui one column stackable grid">
-			<div className="ui main container">
-				<Container />
-			</div>
-		</div>
+	<div className="ui main container">
+	<Container />
+	</div>
+	</div>
 	);
 }

@@ -48,9 +48,9 @@ export const setDrag = (val, initialDragPos) => {
 }
 
 export const screenResize = ([width, height]) => {
-    return {
-        type: SCREEN_RESIZE,
-        screenWidth: width,
-        screenHeight: height
-    };
+	return {
+		type: SCREEN_RESIZE,
+		screenWidth: width,
+		screenHeight: height
+	};
 }
