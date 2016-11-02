@@ -4,7 +4,7 @@
 
 export const TOGGLE_ZOOM = 'TOGGLE_ZOOM';
 export const MOVE_MOUSE = 'MOVE_MOUSE';
-export const UPDATE_DRAG = 'UPDATE_DRAG';
+export const CALCULATE_DRAG = 'CALCULATE_DRAG';
 export const SET_TRANSITION = 'SET_TRANSITION';
 export const SET_DRAG = 'SET_DRAG';
 export const SCREEN_RESIZE = 'SCREEN_RESIZE';
@@ -26,10 +26,9 @@ export const moveMouse = (pos) => {
 	}
 }
 
-export const updateDrag = (pos) => {
+export const calculateDrag = () => {
 	return {
-		type: 'UPDATE_DRAG',
-		pos
+		type: 'CALCULATE_DRAG'
 	}
 }
 

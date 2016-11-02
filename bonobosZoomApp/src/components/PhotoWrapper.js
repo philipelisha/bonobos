@@ -13,11 +13,12 @@ export class PhotoWrapper extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { setTransition } = this.props;
-		if ( nextProps.zoomed ) {
-			setTimeout(() => setTransition(true), 350)
-		} else {
-			setTransition(false)
+		const { setTransition, noTransition, zoomed } = this.props;
+		
+		if ( noTransition === false && zoomed === false && nextProps.zoomed === true ) {
+			setTimeout(() => setTransition(true), 350);
+		} else if ( noTransition === true && zoomed === true && nextProps.zoomed === false ) {
+			setTransition(false);
 		}
 	}
 
@@ -37,17 +38,11 @@ export class PhotoWrapper extends Component {
 	}
 
 	moveMouse(e) {
-		const { moveMouse, updateDrag, screenHeight, dragActive, initialDragPos } = this.props;
+		const { moveMouse, dragActive, calculateDrag } = this.props;
 		const newPos = [e.clientX, e.clientY];
-		const initialDragPosX = initialDragPos[0];
-		const initialDragPosY = initialDragPos[1];
 
 		if ( dragActive ) {
-			let newDragPosX = (newPos[0] - initialDragPosX);
-			newDragPosX = newDragPosX > screenHeight ? screenHeight : (newDragPosX < (screenHeight * -1) ? screenHeight * -1 : newDragPosX);
-			let newDragPosY = (newPos[1] - initialDragPosY);
-			newDragPosY = newDragPosY > screenHeight ? screenHeight : (newDragPosY < (screenHeight * -1) ? screenHeight * -1 : newDragPosY);
-			debounce(updateDrag([newDragPosX, newDragPosY]), 0);
+			debounce(calculateDrag(), 0);
 		}
 
 		moveMouse(newPos);
@@ -65,7 +60,8 @@ export class PhotoWrapper extends Component {
 	render() {
 		const { screenHeight, screenWidth, dragPosition, toggleZoom, zoomed, noTransition, dragActive } = this.props;
 
-		const dragedPosition = `matrix(3, 0, 0, 3, ${dragPosition[0]}, ${dragPosition[1]})`;
+		const dragedPosition = `${dragPosition[0]}, ${dragPosition[1]})`;
+		const matrix = zoomed ? 'matrix(3, 0, 0, 3, ' : 'matrix(1, 0, 0, 1, '
 		const wrapperStyle = {
 			    width: `${screenWidth}px`,
 			    height: `${screenHeight}px`,
@@ -75,7 +71,7 @@ export class PhotoWrapper extends Component {
 		const imgWrapperStyle = {
 			    width: `${screenHeight}px`,
 			    height: `${screenHeight}px`,
-			    transform: zoomed ? dragedPosition : "matrix(1, 0, 0, 1, 0, 0)",
+			    transform: matrix + dragedPosition,
 			    backfaceVisibility: "hidden",
 			    transformOrigin: "50% 50% 0px",
 			    transition: !noTransition ? "transform 350ms ease-in-out" : "none"

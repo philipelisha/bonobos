@@ -1,17 +1,19 @@
 import { connect } from 'react-redux';
-import { toggleZoom, moveMouse, updateDrag, setTransition, setDrag } from '../actions';
+import { toggleZoom, moveMouse, setTransition, setDrag, calculateDrag } from '../actions';
 import { PhotoWrapper } from '../components/PhotoWrapper';
 
 const mapStateToProps = (state) => {
+	const { parentReducer } = state;
+	const { zoom, screenSize, mousePosition } = parentReducer;
 	return {
-		zoomed: state.zoom.zoomed,
-		dragActive: state.zoom.dragActive,
-		initialDragPos: state.zoom.initialDragPos,
-		noTransition: state.zoom.noTransition,
-		mousePosition: state.mousePosition,
-		dragPosition: state.zoom.dragPosition,
-		screenWidth: state.screenSize.screenWidth,
-		screenHeight: state.screenSize.screenHeight
+		zoomed: zoom.zoomed,
+		dragActive: zoom.dragActive,
+		initialDragPos: zoom.initialDragPos,
+		noTransition: zoom.noTransition,
+		dragPosition: zoom.dragPosition,
+		mousePosition: mousePosition,
+		screenWidth: screenSize.screenWidth,
+		screenHeight: screenSize.screenHeight
 	}
 }
 
@@ -20,11 +22,11 @@ const mapDispatchToProps = (dispatch) => {
 		moveMouse: (pos) => {
 			dispatch(moveMouse(pos))
 		},
+		calculateDrag: () => {
+			dispatch(calculateDrag())
+		},
 		toggleZoom: () => {
 			dispatch(toggleZoom())
-		},
-		updateDrag: (pos) => {
-			dispatch(updateDrag(pos))
 		},
 		setTransition: (val) => {
 			dispatch(setTransition(val))

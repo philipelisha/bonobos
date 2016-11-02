@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
-import { zoomApp } from '../reducers';
+import { App } from '../reducers';
 
-export const store = createStore(zoomApp);
+export const store = createStore(App);
 
 // Log the initial state
 console.log(store.getState())
