@@ -1,65 +1,67 @@
-import { CHANGE_ACCOUNTS, DEPOSIT, WITHDRAW } from '../actions';
-import { dataStructure } from "../dataStructure";
+import { TOGGLE_ZOOM, MOVE_MOUSE, UPDATE_DRAG, SCREEN_RESIZE, SET_TRANSITION, SET_DRAG } from '../actions';
 import { combineReducers } from 'redux';
 
-const InitialAccountId = dataStructure.selectedAccountId;
+const screenWidth = typeof window === 'object' ? window.innerWidth : null;
+const screenHeight = typeof window === 'object' ? window.innerHeight : null;
 
-function selectedAccountId(state = InitialAccountId, action) {
+function mousePosition(state = [], action) {
 	switch (action.type) {
-		case CHANGE_ACCOUNTS:
-			return action.id
+		case MOVE_MOUSE:
+			return action.pos
 		default:
 			return state
   }
 }
 
-function accounts(state = [], action) {
+function screenSize(state = {
+	screenWidth,
+	screenHeight
+}, action) {
 	switch (action.type) {
-		case DEPOSIT:
-			return state.map((account) => {
-				if (account.id === action.transactionData.id) {
-					return Object.assign({}, account, {
-						history: [
-							{
-								date: action.transactionData.date,
-								description: "Deposit",
-								amount: action.transactionData.amount,
-								pending: true
-							},
-							...account.history
-						]
-					})
-				}
+		case SCREEN_RESIZE:
+            return Object.assign({}, state, {
+                screenWidth: action.screenWidth,
+                screenHeight: action.screenHeight
+            })
+        default:
+        	return state
+	}
+}
 
-				return account
-		  	})
-		case WITHDRAW:
-			return state.map((account) => {
-				if (account.id === action.transactionData.id) {
-					return Object.assign({}, account, {
-						history: [
-							{
-								date: action.transactionData.date,
-								description: "Withdraw",
-								amount: action.transactionData.amount,
-								pending: false
-							},
-							...account.history
-						]
-					})
-				}
-
-				return account
-		  	})
+function zoom(state = {
+	zoomed: false,
+	dragPosition: [0,0],
+	noTransition: false,
+	dragActive: false,
+	initialDragPos: [0,0]
+}, action) {
+	switch (action.type) {
+		case TOGGLE_ZOOM:
+			return Object.assign({}, state, {
+				zoomed: !state.zoomed,
+				dragPosition: !state.zoomed ? [0,0] : state.dragPosition
+			})
+		case UPDATE_DRAG:
+			return Object.assign({}, state, {
+				dragPosition: action.pos
+			})
+		case SET_TRANSITION:
+			return Object.assign({}, state, {
+				noTransition: action.val
+			})
+		case SET_DRAG:
+			return Object.assign({}, state, {
+				dragActive: action.val,
+				initialDragPos: action.initialDragPos
+			})
 		default:
 	  		return state
   }
 }
 
 
-const bankingApp = combineReducers({
-	selectedAccountId,
-	accounts
-})
-
-export default bankingApp
+export const zoomApp = combineReducers({
+	mousePosition,
+	zoom,
+	screenSize
+});
