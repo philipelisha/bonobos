@@ -1,6 +1,6 @@
 ## Getting Started
 
-The app was built using [https://github.com/facebookincubator/create-react-app](create-react-app)
+The app was built using [create-react-app](https://github.com/facebookincubator/create-react-app)
 
 ### `npm start`
 
