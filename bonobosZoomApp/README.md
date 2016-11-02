@@ -2,7 +2,7 @@
 
 The app was built using [https://github.com/facebookincubator/create-react-app](create-react-app)
 
-### Running `npm start`
+### `npm start`
 
 Runs the app in development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
