@@ -17,5 +17,6 @@ The build system is what comes with react-scripts.
 
 ### Improvements
 
-I would go through and name some things differently to make it easier to read. 
-I would also add the feature on the zoom app on Bonobos.com where it first sets the Y value to 0 and then the X value a few miliseconds later. 
+- I would go through and name some things differently to make it easier to read. 
+- I would also add the feature that's on the zoom app on Bonobos.com where it first sets the Y value to 0 and then the X value a few miliseconds later when zooming out. 
+- I would also like it better if the app zoomed in to where you click rather than the center of the image.
