@@ -22,9 +22,11 @@ Your app is ready to be deployed!
 
 I chose to go with React/Redux. Since your site is also built on those technologies.
 The build system is what comes with react-scripts. 
+The components are stateless and only call actions to update state which then filters down. All of the state is in one object and managed by the reducer. 
 
 ### Improvements
 
 - I would go through and name functions and variables differently to make it easier to read and understand. 
 - I would also add the feature that's on the zoom app on Bonobos.com where it first sets the Y value to 0 and then the X value a few miliseconds later when zooming out. 
 - I would also like it better if the app zoomed in to where you click rather than the center of the image.
+- Rewrite the reducer to be more modular and simpler. 
