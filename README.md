@@ -1,6 +1,9 @@
 ## Getting Started
 
 The app was built using [create-react-app](https://github.com/facebookincubator/create-react-app)
+### `npm install`
+
+Installs all dependacies and dev dependacies.
 
 ### `npm start`
 
