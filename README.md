@@ -26,8 +26,12 @@ The components are stateless and only call actions to update state which then fi
 
 ### Improvements
 
+#### Code Improvements
 - I would go through and name functions and variables differently to make it easier to read and understand.
-- I would restructure the state slightly to make it easier to read. 
+- I would restructure the state slightly to make it easier to read.
 - I would rewrite the reducer to be more modular and simpler. 
+
+#### UI Improvements
+- I would add a loader and also add the image url as part of the state.
 - I would add the feature that's on the zoom app on Bonobos.com when zooming out where it first sets the Y value to 0 and then the X value to 0 a few miliseconds later. 
 - I would make the app zoom in to where you click rather than the center of the image.
