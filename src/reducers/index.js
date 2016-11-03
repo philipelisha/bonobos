@@ -1,4 +1,4 @@
-import { TOGGLE_ZOOM, MOVE_MOUSE, CALCULATE_DRAG, SCREEN_RESIZE, SET_TRANSITION, SET_DRAG } from '../actions';
+import { SET_ZOOM_FALSE, SET_ZOOM_TRUE, MOVE_MOUSE, CALCULATE_DRAG, SCREEN_RESIZE, SET_TRANSITION, SET_DRAG } from '../actions';
 import { combineReducers } from 'redux';
 
 const screenWidth = typeof window === 'object' ? window.innerWidth : null;
@@ -45,13 +45,18 @@ const zoom = function(state = {
 	dragPosition: [0,0],
 	noTransition: false,
 	dragActive: false,
-	initialDragPos: [0,0]
+	initialDragPos: [0,0],
+	oldDragPos: [0,0]
 }, action) {
 	switch (action.type) {
-		case TOGGLE_ZOOM:
+		case SET_ZOOM_FALSE:
 			return Object.assign({}, state.zoom, {
-				zoomed: !state.zoom.zoomed,
-				dragPosition: state.zoom.zoomed ? [0,0] : state.zoom.dragPosition
+				zoomed: false,
+				dragPosition: [0,0]
+			})
+		case SET_ZOOM_TRUE:
+			return Object.assign({}, state.zoom, {
+				zoomed: true
 			})
 		case CALCULATE_DRAG:
 			return Object.assign({}, state.zoom, {
@@ -64,7 +69,8 @@ const zoom = function(state = {
 		case SET_DRAG:
 			return Object.assign({}, state.zoom, {
 				dragActive: action.val,
-				initialDragPos: action.initialDragPos
+				initialDragPos: action.initialDragPos,
+				oldDragPos: action.oldDragPos
 			})
 		default:
 	  		return state
@@ -94,7 +100,8 @@ const parentReducer = function(state = {
     	return Object.assign({}, state, {
 			mousePosition: mousePosition(state.mousePosition, action)
 		})
-    case TOGGLE_ZOOM:
+    case SET_ZOOM_FALSE:
+    case SET_ZOOM_TRUE:
     case CALCULATE_DRAG:
     case SET_TRANSITION:
     case SET_DRAG:

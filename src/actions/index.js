@@ -2,7 +2,8 @@
  * action types
  */
 
-export const TOGGLE_ZOOM = 'TOGGLE_ZOOM';
+export const SET_ZOOM_FALSE = 'SET_ZOOM_FALSE';
+export const SET_ZOOM_TRUE = 'SET_ZOOM_TRUE';
 export const MOVE_MOUSE = 'MOVE_MOUSE';
 export const CALCULATE_DRAG = 'CALCULATE_DRAG';
 export const SET_TRANSITION = 'SET_TRANSITION';
@@ -13,9 +14,15 @@ export const SCREEN_RESIZE = 'SCREEN_RESIZE';
  * action creators
  */
 
-export const toggleZoom = () => {
+export const setZoomFalse = () => {
 	return {
-		type: 'TOGGLE_ZOOM'
+		type: 'SET_ZOOM_FALSE'
+	}
+}
+
+export const setZoomTrue = () => {
+	return {
+		type: 'SET_ZOOM_TRUE'
 	}
 }
 
@@ -39,11 +46,12 @@ export const setTransition = (val) => {
 	}
 }
 
-export const setDrag = (val, initialDragPos) => {
+export const setDrag = (val, initialDragPos, oldDragPos) => {
 	return {
 		type: 'SET_DRAG',
 		val,
-		initialDragPos
+		initialDragPos,
+		oldDragPos
 	}
 }
 

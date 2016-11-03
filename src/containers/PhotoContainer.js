@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { toggleZoom, moveMouse, setTransition, setDrag, calculateDrag } from '../actions';
+import { setZoomFalse, setZoomTrue, moveMouse, setTransition, setDrag, calculateDrag } from '../actions';
 import { PhotoWrapper } from '../components/PhotoWrapper';
 
 const mapStateToProps = (state) => {
@@ -9,6 +9,7 @@ const mapStateToProps = (state) => {
 		zoomed: zoom.zoomed,
 		dragActive: zoom.dragActive,
 		initialDragPos: zoom.initialDragPos,
+		oldDragPos: zoom.oldDragPos,
 		noTransition: zoom.noTransition,
 		dragPosition: zoom.dragPosition,
 		mousePosition: mousePosition,
@@ -25,14 +26,17 @@ const mapDispatchToProps = (dispatch) => {
 		calculateDrag: () => {
 			dispatch(calculateDrag())
 		},
-		toggleZoom: () => {
-			dispatch(toggleZoom())
+		setZoomFalse: () => {
+			dispatch(setZoomFalse())
+		},
+		setZoomTrue: () => {
+			dispatch(setZoomTrue())
 		},
 		setTransition: (val) => {
 			dispatch(setTransition(val))
 		},
-		setDrag: (val, initialDragPos) => {
-			dispatch(setDrag(val, initialDragPos))
+		setDrag: (val, initialDragPos, oldDragPos) => {
+			dispatch(setDrag(val, initialDragPos, oldDragPos))
 		}
 	}
 }
