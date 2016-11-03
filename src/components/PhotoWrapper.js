@@ -25,9 +25,11 @@ export class PhotoWrapper extends Component {
 	startDrag(e) {
 		e.preventDefault();
 		const { dragPosition, zoomed, dragActive, setDrag, setZoomTrue } = this.props;
+
 		if ( zoomed && !dragActive ) {
 			const newPosEvent = e.targetTouches ? e.targetTouches[0] : e;
-			const newPos = [newPosEvent.clientX, newPosEvent.clientY]
+			const newPos = [newPosEvent.clientX, newPosEvent.clientY];
+
 			const initialDragPosX = newPos[0] - dragPosition[0];
 			const initialDragPosY = newPos[1] - dragPosition[1];
 			setDrag(true, [initialDragPosX, initialDragPosY], dragPosition);
@@ -45,6 +47,7 @@ export class PhotoWrapper extends Component {
 
 	moveMouse(e) {
 		const { moveMouse, dragActive, calculateDrag } = this.props;
+
 		const newPosEvent = e.targetTouches ? e.targetTouches[0] : e;
 		const newPos = [newPosEvent.clientX, newPosEvent.clientY]
 
@@ -59,9 +62,9 @@ export class PhotoWrapper extends Component {
 	endDrag() {
 		const { setDrag, dragPosition, oldDragPos, setZoomFalse, zoomed, dragActive } = this.props;
 		
-		if ( dragActive ) {
+		if ( dragActive && zoomed ) {
 			// check the threshold for dragging if its less than 5 pixels toggle zoom false
-			if ( zoomed && Math.abs(oldDragPos[0] - dragPosition[0]) < 5 && Math.abs(oldDragPos[1] - dragPosition[1]) < 5 ) {
+			if ( Math.abs(oldDragPos[0] - dragPosition[0]) < 5 && Math.abs(oldDragPos[1] - dragPosition[1]) < 5 ) {
 				setZoomFalse();
 			}
 	

@@ -31,9 +31,9 @@ const screenSize = function(state = {
 const calculateDragPosition = (state) => {
 	const { mousePosition } = state;
 	const { screenHeight } = state.screenSize;
-	const { initialDragPos } = state.zoom;
-	let newDragPosX = (mousePosition[0] - initialDragPos[0]);
-	let newDragPosY = (mousePosition[1] - initialDragPos[1]);
+	const { initialMousePos } = state.zoom;
+	let newDragPosX = (mousePosition[0] - initialMousePos[0]);
+	let newDragPosY = (mousePosition[1] - initialMousePos[1]);
 	newDragPosX = newDragPosX > screenHeight ? screenHeight : (newDragPosX < (screenHeight * -1) ? screenHeight * -1 : newDragPosX);
 	newDragPosY = newDragPosY > screenHeight ? screenHeight : (newDragPosY < (screenHeight * -1) ? screenHeight * -1 : newDragPosY);
 
@@ -42,10 +42,10 @@ const calculateDragPosition = (state) => {
 
 const zoom = function(state = {
 	zoomed: false,
-	dragPosition: [0,0],
 	noTransition: false,
 	dragActive: false,
-	initialDragPos: [0,0],
+	dragPosition: [0,0],
+	initialMousePos: [0,0],
 	oldDragPos: [0,0]
 }, action) {
 	switch (action.type) {
@@ -69,7 +69,7 @@ const zoom = function(state = {
 		case SET_DRAG:
 			return Object.assign({}, state.zoom, {
 				dragActive: action.val,
-				initialDragPos: action.initialDragPos,
+				initialMousePos: action.initialMousePos,
 				oldDragPos: action.oldDragPos
 			})
 		default:
@@ -85,10 +85,11 @@ const parentReducer = function(state = {
 	mousePosition: [],
 	zoom: {
 		zoomed: false,
-		dragPosition: [0,0],
 		noTransition: false,
 		dragActive: false,
-		initialDragPos: [0,0]
+		dragPosition: [0,0],
+		initialMousePos: [0,0],
+		oldDragPos: [0,0]
 	}
 }, action = '') {
   switch (action.type) {

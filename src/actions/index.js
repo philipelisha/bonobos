@@ -46,11 +46,11 @@ export const setTransition = (val) => {
 	}
 }
 
-export const setDrag = (val, initialDragPos, oldDragPos) => {
+export const setDrag = (val, initialMousePos, oldDragPos) => {
 	return {
 		type: 'SET_DRAG',
 		val,
-		initialDragPos,
+		initialMousePos,
 		oldDragPos
 	}
 }

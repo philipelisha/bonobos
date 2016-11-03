@@ -4,15 +4,13 @@ import { PhotoWrapper } from '../components/PhotoWrapper';
 
 const mapStateToProps = (state) => {
 	const { parentReducer } = state;
-	const { zoom, screenSize, mousePosition } = parentReducer;
+	const { zoom, screenSize } = parentReducer;
 	return {
 		zoomed: zoom.zoomed,
-		dragActive: zoom.dragActive,
-		initialDragPos: zoom.initialDragPos,
-		oldDragPos: zoom.oldDragPos,
 		noTransition: zoom.noTransition,
+		dragActive: zoom.dragActive,
+		oldDragPos: zoom.oldDragPos,
 		dragPosition: zoom.dragPosition,
-		mousePosition: mousePosition,
 		screenWidth: screenSize.screenWidth,
 		screenHeight: screenSize.screenHeight
 	}
@@ -35,8 +33,8 @@ const mapDispatchToProps = (dispatch) => {
 		setTransition: (val) => {
 			dispatch(setTransition(val))
 		},
-		setDrag: (val, initialDragPos, oldDragPos) => {
-			dispatch(setDrag(val, initialDragPos, oldDragPos))
+		setDrag: (val, initialMousePos, oldDragPos) => {
+			dispatch(setDrag(val, initialMousePos, oldDragPos))
 		}
 	}
 }
