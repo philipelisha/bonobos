@@ -30,6 +30,8 @@ The components are stateless and only call actions to update state which then fi
 - I would go through and name functions and variables differently to make it easier to read and understand.
 - I would restructure the state slightly to make it easier to read.
 - I would rewrite the reducer to be more modular and simpler. 
+- I would decouple the build process from react-scripts.
+- I would add unit testing.
 
 #### UI Improvements
 - I would add a loader and also add the image url as part of the state.
